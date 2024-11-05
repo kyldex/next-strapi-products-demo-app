@@ -1,14 +1,36 @@
-Installation et Exécution en Local :
-■ Backend Strapi :
-■ Instructions pour cloner le dépôt et installer les dépendances
-avec yarn install ou npm install.
-■ Démarrer Strapi avec yarn develop ou npm run develop.
-■ Créer un fichier .env.example où vous listez les variables
-d’environnement à utiliser.
- 
-■ Frontend Next.js :
-■ Instructions pour cloner le dépôt, installer les dépendances
-(yarn install ou npm install) et démarrer le serveur de
-développement avec yarn dev ou npm run dev.
-■ Créer un fichier .env.example où vous listez les variables
-d’environnement à utiliser.
+Le repository est décomposé en 2 parties : backend et frontend.
+
+D'abord, cloner l'ensemble de ce repository en local.
+
+## Dossier backend
+
+Installation et Exécution en local :
+- Aller dans le fichier `backend` et installer les dépendances :
+```bash
+cd backend
+npm install
+```
+- Créer un fichier `.env` à la racine de `backend` avec l'exemple `.env.example`.  
+Strapi devrait configurer automatiquement les valeurs des variables au premier lancement de l'application.  
+Vous pouvez utiliser SQLite.
+- Démarrer le serveur de développement en local avec :
+```bash
+npm run develop
+```
+- La page de création de compte admin devrait s'ouvrir automatiquement dans votre navigateur (sinon: http://localhost:1337/admin). Créer un compte utilisateur local.
+
+## Dossier frontend
+
+Installation et Exécution en local :
+- Aller dans le fichier `frontend` et installer les dépendances :
+```bash
+cd frontend
+npm install
+```
+- Créer un fichier `.env.development` à la racine de `frontend` avec l'exemple `.env.example`.  
+Vous pouvez mettre une valeur aléatoire de test pour `NEXT_PUBLIC_ANALYTICS_ID`.  
+- Démarrer le serveur de développement Next.js en local avec :
+```bash
+npm run dev
+```
+- Vous pouvez vous rendre sur http://localhost:3000 pour tester l'application.
