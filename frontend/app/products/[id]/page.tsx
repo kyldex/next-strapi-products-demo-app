@@ -16,6 +16,15 @@ async function fetchProduct(id: string) {
   return data.data as Product;
 }
 
+export async function generateMetadata({ params }: { params: { id: string } }) {
+  const product = await fetchProduct(params.id);
+
+  return {
+    title: product.attributes.SEO[0].metaTitle || product.attributes.Nom,
+    description: product.attributes.SEO[0].metaDescription || product.attributes.Description,
+  };
+}
+
 type ProductPageProps = {
   params: { id: string };
 };
