@@ -2,6 +2,9 @@ Le repository est décomposé en 2 parties : backend et frontend.
 
 D'abord, cloner l'ensemble de ce repository en local.
 
+Pré-requis :
+- Node 20, npm
+
 ## Dossier backend
 
 Installation et Exécution en local :
@@ -18,6 +21,11 @@ Vous pouvez utiliser SQLite.
 npm run develop
 ```
 - La page de création de compte admin devrait s'ouvrir automatiquement dans votre navigateur (sinon: http://localhost:1337/admin). Créer un compte utilisateur local.
+- Ensuite, stopper le serveur local, et importer les données de test :
+```bash
+npm run strapi import -- -f ./data/products_data_demo.tar.gz.enc --key products
+```
+- Relancez le serveur, les produits devraient apparaitre dans le back-office.
 
 ## Dossier frontend
 
