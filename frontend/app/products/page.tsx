@@ -4,9 +4,9 @@ import Link from 'next/link';
 type Product = {
   id: number;
   attributes: {
-    name: string;
-    description: string;
-    price?: number;
+    Nom: string;
+    Description: string;
+    Prix?: number;
     image: {
       data: {
         attributes: {
@@ -20,7 +20,7 @@ type Product = {
 
 async function fetchProducts() {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/produits?populate=image`
+    `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/produits?populate=*`
   );
   if (!res.ok) {
     throw new Error('Failed to fetch products');
@@ -31,6 +31,7 @@ async function fetchProducts() {
 
 export default async function ProductsPage() {
   const products = await fetchProducts();
+  console.log(products);
 
   return (
     <div className="p-8">
@@ -45,20 +46,17 @@ export default async function ProductsPage() {
             {product.attributes.image?.data && (
               <Image
                 src={product.attributes.image.data.attributes.url}
-                alt={
-                  product.attributes.image.data.attributes.alternativeText ||
-                  product.attributes.name
-                }
+                alt=""
                 width={200}
                 height={200}
                 className="rounded-lg mb-4"
               />
             )}
             <h2 className="text-xl font-bold mb-2">
-              {product.attributes.name}
+              {product.attributes.Nom}
             </h2>
             <p className="text-gray-600 mb-4">
-              {product.attributes.description}
+              {product.attributes.Description}
             </p>
           </Link>
         ))}
