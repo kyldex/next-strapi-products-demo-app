@@ -1,30 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-type Product = {
-  id: number;
-  attributes: {
-    Nom: string;
-    Description: string;
-    Prix?: number;
-    Image: {
-      data: {
-        attributes: {
-          url: string;
-          alternativeText: string;
-        };
-      };
-    };
-  };
-};
-
-const getImageUrl = (product: Product): string | null => {
-  const imageUrl = product.attributes.Image?.data
-    ? `${process.env.NEXT_PUBLIC_STRAPI_BASE_URL}${product.attributes.Image.data.attributes.url}`
-    : null;
-
-  return imageUrl;
-};
+import getProductImageUrl from '@/utils/getProductImageUrl';
+import type Product from '@/types/Product';
 
 async function fetchProducts() {
   const res = await fetch(
@@ -45,7 +23,7 @@ export default async function ProductsPage() {
       <h1 className="text-3xl font-semibold mb-8 text-center">Nos Produits</h1>
       <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
         {products.map((product) => {
-          const productImageUrl = getImageUrl(product);
+          const productImageUrl = getProductImageUrl(product);
           return (
             <Link
               href={`/products/${product.id}`}

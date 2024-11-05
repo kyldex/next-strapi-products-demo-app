@@ -1,21 +1,7 @@
 import Image from 'next/image';
 
-type ProductDetails = {
-  id: number;
-  attributes: {
-    Nom: string;
-    Description: string;
-    Prix?: number;
-    image: {
-      data: {
-        attributes: {
-          url: string;
-          alternativeText: string;
-        };
-      };
-    };
-  };
-};
+import getProductImageUrl from '@/utils/getProductImageUrl';
+import type Product from '@/types/Product';
 
 async function fetchProduct(id: string) {
   const res = await fetch(
@@ -25,7 +11,7 @@ async function fetchProduct(id: string) {
     throw new Error('Failed to fetch product details');
   }
   const data = await res.json();
-  return data.data as ProductDetails;
+  return data.data as Product;
 }
 
 type ProductPageProps = {
@@ -34,6 +20,7 @@ type ProductPageProps = {
 
 export default async function ProductPage({ params }: ProductPageProps) {
   const product = await fetchProduct(params.id);
+  const productImageUrl = getProductImageUrl(product);
 
   return (
     <div className="p-8">
@@ -41,11 +28,11 @@ export default async function ProductPage({ params }: ProductPageProps) {
         {product.attributes.Nom}
       </h1>
 
-      {product.attributes.image?.data && (
+      {productImageUrl && (
         <Image
-          src={product.attributes.image.data.attributes.url}
+          src={productImageUrl}
           alt={
-            product.attributes.image.data.attributes.alternativeText ||
+            product.attributes.Image.data.attributes.alternativeText ||
             product.attributes.Nom
           }
           width={400}
@@ -54,11 +41,11 @@ export default async function ProductPage({ params }: ProductPageProps) {
         />
       )}
 
-      <p className="text-lg text-gray-700 mb-4">
+      <p className="text-lg text-gray-700 text-center mb-4">
         {product.attributes.Description}
       </p>
       {product.attributes.Prix && (
-        <p className="text-xl font-semibold text-gray-800 mb-4">
+        <p className="text-xl font-semibold text-gray-800 text-center mb-4">
           Prix : {product.attributes.Prix}€
         </p>
       )}
