@@ -26,6 +26,7 @@ npm run develop
 npm run strapi import -- -f ./data/products_data_demo.tar.gz.enc --key products
 ```
 - Relancez le serveur, les produits devraient apparaitre dans le back-office.
+- Vérifier dans les Settings du back-office, dans Users & Permissions plugin > Roles > Public, que les permissions pour `Produit` sont bien activées pour `find` et `findOne`.
 
 ## Dossier frontend
 

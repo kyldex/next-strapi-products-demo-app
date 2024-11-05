@@ -4,6 +4,7 @@ type Product = {
     Nom: string;
     Description: string;
     Prix?: number;
+    GTM_ID: string;
     Image: {
       data: {
         attributes: {

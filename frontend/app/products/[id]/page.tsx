@@ -1,5 +1,7 @@
 import Image from 'next/image';
 
+import GtmEventTracker from '@/components/GtmEventTracker';
+
 import getProductImageUrl from '@/utils/getProductImageUrl';
 import type Product from '@/types/Product';
 
@@ -49,6 +51,18 @@ export default async function ProductPage({ params }: ProductPageProps) {
           Prix : {product.attributes.Prix}€
         </p>
       )}
+
+      <GtmEventTracker
+        eventType="page_view"
+        pageName="Détail Produit"
+        pagePath={`/products/${product.id}`}
+      />
+      <GtmEventTracker
+        eventType="product_view"
+        productId={product.id}
+        productName={product.attributes.Nom}
+        productPrice={product.attributes.Prix}
+      />
     </div>
   );
 }
