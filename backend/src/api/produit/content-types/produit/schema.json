@@ -1,0 +1,45 @@
+{
+  "kind": "collectionType",
+  "collectionName": "produits",
+  "info": {
+    "singularName": "produit",
+    "pluralName": "produits",
+    "displayName": "Produit",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Nom": {
+      "type": "string",
+      "required": true
+    },
+    "Description": {
+      "type": "text",
+      "required": true
+    },
+    "Image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "Prix": {
+      "type": "decimal"
+    },
+    "GTM_ID": {
+      "type": "string",
+      "required": true
+    },
+    "SEO": {
+      "type": "component",
+      "repeatable": true,
+      "component": "seo.seo",
+      "required": true
+    }
+  }
+}
